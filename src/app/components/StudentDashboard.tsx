@@ -124,14 +124,10 @@ export default function StudentDashboard() {
     e.preventDefault();
     if (selectedTask) {
       try {
-        const formData = new FormData();
-        formData.append('responseText', response);
-        if (responseImage) {
-          formData.append('responseImage', responseImage);
-        }
         const res = await fetch(`${API_BASE_URL}/api/tasks/${selectedTask._id}/submit`, {
           method: 'POST',
-          body: formData
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ responseText: response }),
         });
         if (res.ok) {
           const updated = await res.json();
