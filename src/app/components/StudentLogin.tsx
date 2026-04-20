@@ -49,8 +49,6 @@ export default function StudentLogin() {
     }
   };
 
-
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-emerald-50 to-teal-100 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
@@ -170,8 +168,6 @@ export default function StudentLogin() {
               {isLogin ? 'Sign In as Student' : 'Create Student Account'}
             </button>
           </form>
-
-
 
           <div className="mt-6 text-center">
             <button
