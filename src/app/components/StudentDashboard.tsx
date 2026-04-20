@@ -1,4 +1,5 @@
 import { useMemo, useState, useEffect, useRef } from 'react';
+import API_BASE_URL from '../../imports/apiConfig';
 import { useNavigate } from 'react-router';
 import { GraduationCap, LogOut, CheckCircle, Clock, AlertCircle, Upload, Send, TrendingUp, Bot, Settings, ClipboardList, Map as MapIcon, Target, Award } from 'lucide-react';
 
@@ -100,8 +101,8 @@ export default function StudentDashboard() {
   const fetchTasks = async () => {
     try {
       const url = userId
-        ? `http://localhost:3001/api/tasks?assignedTo=${encodeURIComponent(userId)}`
-        : 'http://localhost:3001/api/tasks';
+        ? `${API_BASE_URL}/api/tasks?assignedTo=${encodeURIComponent(userId)}`
+        : `${API_BASE_URL}/api/tasks`;
       const res = await fetch(url);
       const data = await res.json();
       setTasks(data);
@@ -128,7 +129,7 @@ export default function StudentDashboard() {
         if (responseImage) {
           formData.append('responseImage', responseImage);
         }
-        const res = await fetch(`http://localhost:3001/api/tasks/${selectedTask._id}/submit`, {
+        const res = await fetch(`${API_BASE_URL}/api/tasks/${selectedTask._id}/submit`, {
           method: 'POST',
           body: formData
         });
@@ -202,7 +203,7 @@ export default function StudentDashboard() {
     setAiLoading(true);
 
     try {
-      const res = await fetch('http://localhost:3001/api/ai/student-assist', {
+      const res = await fetch(`${API_BASE_URL}/api/ai/student-assist`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

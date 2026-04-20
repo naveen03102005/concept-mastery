@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { GraduationCap, Lock, Mail, User } from 'lucide-react';
+import API_BASE_URL from '../../imports/apiConfig';
 
 export default function StudentLogin() {
   const navigate = useNavigate();
@@ -16,8 +17,8 @@ export default function StudentLogin() {
     setError('');
     
     const endpoint = isLogin 
-      ? 'http://localhost:3001/api/student/login' 
-      : 'http://localhost:3001/api/student/register';
+      ? `${API_BASE_URL}/api/student/login` 
+      : `${API_BASE_URL}/api/student/register`;
     
     const body = isLogin 
       ? { email, password } 

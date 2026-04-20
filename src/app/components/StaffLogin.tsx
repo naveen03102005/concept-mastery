@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { BookOpen, Lock, Mail, User } from 'lucide-react';
+import API_BASE_URL from '../../imports/apiConfig';
 
 export default function StaffLogin() {
   const navigate = useNavigate();
@@ -16,8 +17,8 @@ export default function StaffLogin() {
     setError('');
     
     const endpoint = isLogin 
-      ? 'http://localhost:3001/api/staff/login' 
-      : 'http://localhost:3001/api/staff/register';
+      ? `${API_BASE_URL}/api/staff/login` 
+      : `${API_BASE_URL}/api/staff/register`;
     
     const body = isLogin 
       ? { email, password } 

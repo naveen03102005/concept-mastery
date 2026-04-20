@@ -1,4 +1,5 @@
 import { useMemo, useState, useEffect } from 'react';
+import API_BASE_URL from '../../imports/apiConfig';
 import { useNavigate } from 'react-router';
 import { BookOpen, Plus, LogOut, Users, ClipboardList, CheckCircle, Clock, AlertCircle, Settings, FileText, CheckSquare, XCircle } from 'lucide-react';
 
@@ -47,7 +48,7 @@ export default function StaffDashboard() {
 
   const fetchTasks = async () => {
     try {
-      const res = await fetch(`http://localhost:3001/api/tasks?createdBy=${userId}`);
+      const res = await fetch(`${API_BASE_URL}/api/tasks?createdBy=${userId}`);
       const data = await res.json();
       setTasks(data);
     } catch (err) {
@@ -59,7 +60,7 @@ export default function StaffDashboard() {
 
   const fetchStudents = async () => {
     try {
-      const res = await fetch('http://localhost:3001/api/students');
+      const res = await fetch(`${API_BASE_URL}/api/students`);
       const data = await res.json();
       setStudents(Array.isArray(data) ? data : []);
     } catch (err) {
@@ -90,7 +91,7 @@ export default function StaffDashboard() {
     e.preventDefault();
     try {
       const createOne = async (assignedTo?: string) => {
-        const res = await fetch('http://localhost:3001/api/tasks', {
+        const res = await fetch(`${API_BASE_URL}/api/tasks`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -122,7 +123,7 @@ export default function StaffDashboard() {
 
   const handleDeleteTask = async (taskId: string) => {
     try {
-      await fetch(`http://localhost:3001/api/tasks/${taskId}`, { method: 'DELETE' });
+      await fetch(`${API_BASE_URL}/api/tasks/${taskId}`, { method: 'DELETE' });
       setTasks(tasks.filter(t => t._id !== taskId));
     } catch (err) {
       console.error('Failed to delete task:', err);
@@ -131,7 +132,7 @@ export default function StaffDashboard() {
 
   const handleApproveTask = async (taskId: string) => {
     try {
-      const res = await fetch(`http://localhost:3001/api/tasks/${taskId}/approve`, {
+      const res = await fetch(`${API_BASE_URL}/api/tasks/${taskId}/approve`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ approvedBy: userId }),
@@ -153,7 +154,7 @@ export default function StaffDashboard() {
 
   const handleRejectTask = async (taskId: string) => {
     try {
-      const res = await fetch(`http://localhost:3001/api/tasks/${taskId}/reject`, {
+      const res = await fetch(`${API_BASE_URL}/api/tasks/${taskId}/reject`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ rejectedBy: userId, feedback: rejectFeedback }),
