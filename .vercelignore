@@ -1,0 +1,3 @@
+# Exclude the Express server — it is NOT deployed to Vercel.
+# The Vercel API functions live in /api instead.
+server/
